@@ -1,10 +1,11 @@
 <script>
   import Profile from './Profile.svelte';
+  import Links from './Links.svelte';
 </script>
 
 <main class="container">
   <Profile />
-  <!-- Links -->
+  <Links />
 </main>
 
 <style scoped>
@@ -14,5 +15,7 @@
     display: flex;
     margin: 2rem auto;
     justify-content: center;
+    display: flex;
+    flex-direction: column;
   }
 </style>
