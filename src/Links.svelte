@@ -5,9 +5,7 @@
   let links = [];
 
   onMount(async () => {
-    const { data } = await axios.get(
-      'http://api-bineetnaidu-io.herokuapp.com/api/links'
-    );
+    const { data } = await axios.get(process.env.API_URL);
     if (data.success) {
       links = data.data;
     }
