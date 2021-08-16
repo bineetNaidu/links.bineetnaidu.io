@@ -29,8 +29,6 @@
 
 <style scoped>
   section {
-    display: flex;
-    justify-content: center;
     width: 70%;
     margin: auto;
     padding-top: 2rem;
@@ -42,12 +40,12 @@
   }
 
   .links {
-    display: grid;
+    display: flex;
+    justify-content: center;
     list-style: none;
     padding: 0;
     margin: 0;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
+    flex-wrap: wrap;
     width: 100%;
   }
 

@@ -10,12 +10,19 @@
 
 <style scoped>
   .container {
-    width: 100%;
+    width: 65%;
     height: 100%;
     display: flex;
-    margin: 2rem auto;
+    margin: auto;
+    padding: 2rem 0;
     justify-content: center;
     display: flex;
     flex-direction: column;
+  }
+
+  @media (max-width: 550px) {
+    .container {
+      width: 95%;
+    }
   }
 </style>
