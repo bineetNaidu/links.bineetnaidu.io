@@ -1,9 +1,18 @@
 <script>
+  import Profile from './Profile.svelte';
 </script>
 
-<main>
-  <h1>Hello Links!</h1>
+<main class="container">
+  <Profile />
+  <!-- Links -->
 </main>
 
 <style scoped>
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    margin: 2rem auto;
+    justify-content: center;
+  }
 </style>
