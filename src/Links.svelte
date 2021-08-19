@@ -3,25 +3,35 @@
   import axios from 'axios';
 
   let links = [];
+  let loading = true;
 
   onMount(async () => {
     const { data } = await axios.get(process.env.API_URL);
     if (data.success) {
       links = data.data;
+      loading = false;
     }
   });
 </script>
 
 <section>
   <ul class="links">
-    {#each links as l (l._id)}
-      <li class="link">
-        <a href={l.url}>
-          <i class={l.icon} />
-        </a>
-        <span class="label">{l.label}</span>
-      </li>
-    {/each}
+    {#if loading}
+      {#each [1, 2, 3, 4, 5] as i (i)}
+        <li>
+          <div class="loader"><i class="fas fa-atom" /></div>
+        </li>
+      {/each}
+    {:else}
+      {#each links as l (l._id)}
+        <li class="link">
+          <a href={l.url}>
+            <i class={l.icon} />
+          </a>
+          <span class="label">{l.label}</span>
+        </li>
+      {/each}
+    {/if}
   </ul>
 </section>
 
@@ -45,6 +55,13 @@
     margin: 0;
     flex-wrap: wrap;
     width: 100%;
+  }
+
+  .loader > i {
+    font-size: 2rem;
+    margin: 0 1.5rem;
+    transition: all 0.3s ease-in-out;
+    animation: spin-n-scale 2s infinite ease-in-out;
   }
 
   .link {
@@ -85,5 +102,20 @@
   .link a {
     text-decoration: none;
     font-size: 2rem;
+  }
+
+  @keyframes spin-n-scale {
+    0% {
+      -webkit-transform: scale(0.5) rotate(0deg);
+      transform: scale(0.5) rotate(0deg);
+    }
+    50% {
+      -webkit-transform: scale(1.1) rotate(360deg);
+      transform: scale(1.1) rotate(360deg);
+    }
+    100% {
+      -webkit-transform: scale(0.5) rotate(720deg);
+      transform: scale(0.5) rotate(720deg);
+    }
   }
 </style>
