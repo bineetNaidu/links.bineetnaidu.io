@@ -2,14 +2,19 @@
   import { onMount } from 'svelte';
   import axios from 'axios';
 
-  let links = [];
-  let loading = true;
-
+  let links = localStorage.getItem(process.env.OBJECT_STORAGE_KEY)
+    ? JSON.parse(localStorage.getItem(process.env.OBJECT_STORAGE_KEY))
+    : [];
+  let loading = !!length.length;
   onMount(async () => {
     const { data } = await axios.get(process.env.API_URL);
     if (data.success) {
       links = data.data;
       loading = false;
+      localStorage.setItem(
+        process.env.OBJECT_STORAGE_KEY,
+        JSON.stringify(links)
+      );
     }
   });
 </script>
