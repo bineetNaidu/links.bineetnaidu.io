@@ -46,6 +46,9 @@ export default {
   plugins: [
     replace({
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
+      'process.env.OBJECT_STORAGE_KEY': JSON.stringify(
+        process.env.OBJECT_STORAGE_KEY
+      ),
     }),
     svelte({
       compilerOptions: {
