@@ -6,6 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
 import dotenv from 'dotenv';
 import replace from '@rollup/plugin-replace';
+import childProcess from 'child_process';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -20,14 +21,10 @@ function serve() {
   return {
     writeBundle() {
       if (server) return;
-      server = require('child_process').spawn(
-        'npm',
-        ['run', 'start', '--', '--dev'],
-        {
-          stdio: ['ignore', 'inherit', 'inherit'],
-          shell: true,
-        }
-      );
+      server = childProcess.spawn('npm', ['run', 'start', '--', '--dev'], {
+        stdio: ['ignore', 'inherit', 'inherit'],
+        shell: true,
+      });
 
       process.on('SIGTERM', toExit);
       process.on('exit', toExit);
@@ -49,6 +46,7 @@ export default {
       'process.env.OBJECT_STORAGE_KEY': JSON.stringify(
         process.env.OBJECT_STORAGE_KEY
       ),
+      preventAssignment: true,
     }),
     svelte({
       compilerOptions: {
