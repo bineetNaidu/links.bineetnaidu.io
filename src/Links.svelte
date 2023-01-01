@@ -7,7 +7,14 @@
     : [];
   let loading = !!length.length;
   onMount(async () => {
-    const { data } = await axios.get(process.env.API_URL);
+    const body = JSON.stringify({
+      query: `query Links { links { _id label icon url createdAt updatedAt } }`,
+    });
+    const { data } = await axios.post(process.env.API_URL, body, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     if (data.success) {
       links = data.data;
       loading = false;
